@@ -2,14 +2,10 @@
 #include <iostream>
 #include "desenhoBasico.hpp"
 
-static float zoomOut = 0.0f;
-
 /**
  * Função para definições premiliares do projeto
  */
 void aplicarConfigInicial(GLFWwindow *window);
-
-void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 
 /**
  * Função para redimensionamento de janela
@@ -18,14 +14,22 @@ void ajustarJanela(GLFWwindow *window, int w, int h);
 
 void desenharCena()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    static float zoomOut = 0.0f;
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // phDesenharPontosElementos();
 
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    // phPonto p1 = {0.0, 0.0, -100.0, 128, 128, 243}; // x, y, z, r, g, b
+    // phDesenharPonto(&p1, 10);
 
-    glTranslatef(0.0f, 0.0f, 0.0f - zoomOut);
+    glMatrixMode(GL_MODELVIEW); // Habilitando modo de edição do modelo-visão
+    glLoadIdentity(); // Carrega a matriz identidade
+    
+    glTranslatef(0.0f, 0.0f, -6.0f - zoomOut); //tx, ty, tz
 
-    phDesenharEsfera(1);
+    phDesenharCubo();
+
+    zoomOut = zoomOut + 0.02;
+    std::cout << "Zoom out: " << zoomOut << std::endl;
 }
 
 int main(void)
@@ -39,7 +43,7 @@ int main(void)
         std::cout << "Funcionou glfw" << std::endl;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "View e projecao ortogonal", NULL, NULL);
+    window = glfwCreateWindow(600, 600, "View e projecao ortogonal", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -72,8 +76,7 @@ void aplicarConfigInicial(GLFWwindow *window)
     std::cout << "Aplicando configuração inicial" << std::endl;
 
     glClearColor(0.40f, 0.40f, 0.40f, 1.0f); // Especifica cor de fundo
-
-    glfwSetScrollCallback(window,  scroll_callback);
+    glEnable(GL_DEPTH_BUFFER_BIT); // Habilitando profundidade
 
     //Configuração do registro de callbacks do glfw
     ajustarJanela(window, 200, 200);
@@ -91,10 +94,5 @@ void ajustarJanela(GLFWwindow *window, int w, int h)
 
     glMatrixMode(GL_PROJECTION); // Uma alteração que envolve a projeção é necessária
 
-    glFrustum(-5.0, 5.0, -5.0, 5.0, -1, 1); // Exemplo slide
-}
-
-void scroll_callback(GLFWwindow *window, double xoffset, double yoffset) {
-    zoomOut += yoffset / 10;
-    std::cout << "zoomOut: " << zoomOut << std::endl;
+    glFrustum(-5.0, 5.0, -5.0, 5.0, 5, 100); // Exemplo slide
 }
