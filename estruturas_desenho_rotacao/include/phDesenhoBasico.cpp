@@ -43,19 +43,22 @@ void phDesenhaCirculo(float x, float y, float z, float raio, float r, float g, f
     glEnd();
 }
 
-void phDesenharPontosElementos() {
+void phDesenharPontosElementos()
+{
     glPointSize(5.0f); // Tamanho do ponto
     glLineWidth(5.0f); // Tamanho do ponto
 
     // Experimento para o uso de glDrawElements
-    float pontosCoords[4][3] = { //x, y, z
+    float pontosCoords[4][3] = {
+        //x, y, z
         {-5.0, 5.0, -100.0},
         {5.0, 5.0, -100.0},
         {5.0, -5.0, -5.0},
         {-5.0, -5.0, -5.0},
     };
 
-    float pontosCor[4][3] = { //r, g, b
+    float pontosCor[4][3] = {
+        //r, g, b
         {1.0, 0.0, 0.0},
         {0.0, 1.0, -100.0},
         {0.0, 0.0, -5.0},
@@ -66,7 +69,7 @@ void phDesenharPontosElementos() {
     glEnableClientState(GL_COLOR_ARRAY);
     glVertexPointer(3, GL_FLOAT, 0, pontosCoords); // Size, tipo deslocamento inicial, ponteiro
     glColorPointer(3, GL_FLOAT, 0, pontosCor);
- 
+
     //Desenha
     glDrawArrays(GL_LINES, 0, 4);
 
@@ -80,7 +83,8 @@ void phDesenharPontosElementos() {
  * @param ponto 
  * @param tamanho 
  */
-void phDesenharPonto(phPonto *ponto, int tamanho) {
+void phDesenharPonto(phPonto *ponto, int tamanho)
+{
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
 
@@ -88,33 +92,32 @@ void phDesenharPonto(phPonto *ponto, int tamanho) {
     // glColorPointer(3, GL_FLOAT, 0, &ponto->r);
     glColorPointer(3, GL_UNSIGNED_BYTE, 0, &ponto->r);
 
-    glPointSize(tamanho); // Tamanho do ponto
+    glPointSize(tamanho);          // Tamanho do ponto
     glDrawArrays(GL_POINTS, 0, 1); // Desenha um ponto
 
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
 }
 
-void phDesenharCubo() {
-    glPolygonMode(GL_FRONT_AND_BACK,  GL_LINE);
+void phDesenharCubo()
+{
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     GLfloat verticesCubo[] = {
-        -1, -1, -1,  -1, -1, 1,  -1, 1, 1, -1, 1,-1,
-         1, -1, -1,   1, -1, 1,   1, 1, 1,  1, 1,-1,
-        -1, -1, -1,  -1, -1, 1,   1,-1, 1,  1,-1,-1,
-        -1,  1, -1,  -1,  1, 1,   1, 1, 1,  1, 1,-1,
-        -1, -1, -1,  -1,  1,-1,   1, 1,-1,  1,-1,-1,
-        -1, -1,  1,  -1,  1, 1,   1, 1, 1,  1,-1, 1
-    };
+        -1, -1, -1, -1, -1, 1, -1, 1, 1, -1, 1, -1,
+        1, -1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1,
+        -1, -1, -1, -1, -1, 1, 1, -1, 1, 1, -1, -1,
+        -1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1,
+        -1, -1, -1, -1, 1, -1, 1, 1, -1, 1, -1, -1,
+        -1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1};
 
     GLfloat coresCubo[] = {
-        0, 0, 0,  0, 0, 1,  0, 1, 1,  0, 1, 0,
-        1, 0, 0,  1, 0, 1,  1, 1, 1,  1, 1, 0,
-        0, 0, 0,  0, 0, 1,  1, 0, 1,  1, 0, 0,
-        0, 1, 0,  0, 1, 1,  1, 1, 1,  1, 1, 0,
-        0, 0, 0,  0, 1, 0,  1, 1, 0,  1, 0, 0,
-        0, 0, 1,  0, 1, 1,  1, 1, 1,  1, 0, 1
-    };
+        0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0,
+        1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0,
+        0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0,
+        0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0,
+        0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0,
+        0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1};
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
@@ -132,113 +135,115 @@ void phDesenharCubo() {
 /**
 Figura geometrica - piramide
 */
-void bcvDesenharPiramide(){
+void bcvDesenharPiramide()
+{
 
-glScalef(4.0,4.0,4.0);
-GLfloat verticesPiramide[] = {
--0.5, 0.0, 0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 0.5,
--0.5, 0.0, -0.5, 0.0, 1.0, 0.0, -0.5, 0.0, 0.5,
--0.5, 0.0, -0.5, 0.0, 1.0, 0.0, 0.5, 0.0,-0.5,
-0.5, 0.0,-0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 0.5,
+    glScalef(4.0, 4.0, 4.0);
+    GLfloat verticesPiramide[] = {
+        -0.5, 0.0, 0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 0.5,
+        -0.5, 0.0, -0.5, 0.0, 1.0, 0.0, -0.5, 0.0, 0.5,
+        -0.5, 0.0, -0.5, 0.0, 1.0, 0.0, 0.5, 0.0, -0.5,
+        0.5, 0.0, -0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 0.5,
 
--0.5, 0.0, 0.5, -0.5, 0.0, -0.5, 0.5,0.0,0.5, // base - 2 triangulos
--0.5, 0.0, -0.5, 0.5, 0.0,-0.5, 0.5,0.0,0.5
+        -0.5, 0.0, 0.5, -0.5, 0.0, -0.5, 0.5, 0.0, 0.5, // base - 2 triangulos
+        -0.5, 0.0, -0.5, 0.5, 0.0, -0.5, 0.5, 0.0, 0.5
 
-};
+    };
 
-GLfloat coresPiramide[]={
-0, 0, 0.4, 0, 0, 0.4, 0, 0, 0.4, // azul escuro
-1, 0.5, 0, 1, 0.5, 0, 1, 0.5, 0, // laranja
-1, 1, 0, 1, 1, 0, 1, 1, 0, // amarelo
-0, 1, 0.5, 0, 1, 0.5, 0, 1, 0.5, // verde
-0.0,0.0,0.0, 0.0,0.0,0.0, 0.0,0.0,0.0, // preto
-0.0,0.0,0.0, 0.0,0.0,0.0, 0.0,0.0,0.0 // preto
+    GLfloat coresPiramide[] = {
+        0, 0, 0.4, 0, 0, 0.4, 0, 0, 0.4,             // azul escuro
+        1, 0.5, 0, 1, 0.5, 0, 1, 0.5, 0,             // laranja
+        1, 1, 0, 1, 1, 0, 1, 1, 0,                   // amarelo
+        0, 1, 0.5, 0, 1, 0.5, 0, 1, 0.5,             // verde
+        0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, // preto
+        0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0  // preto
 
-};
+    };
 
-glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-glEnableClientState(GL_VERTEX_ARRAY);
-glEnableClientState(GL_COLOR_ARRAY);
-glVertexPointer(3, GL_FLOAT, 0, verticesPiramide); // size, tipo, deslocamento inicial, ponteiro
-glColorPointer(3, GL_FLOAT, 0, coresPiramide); // size, tipo, deslocamento inicial, ponteiro
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, verticesPiramide); // size, tipo, deslocamento inicial, ponteiro
+    glColorPointer(3, GL_FLOAT, 0, coresPiramide);     // size, tipo, deslocamento inicial, ponteiro
 
-glDrawArrays(GL_TRIANGLES, 0, 6*3); // desenha os pontos da piramide
+    glDrawArrays(GL_TRIANGLES, 0, 6 * 3); // desenha os pontos da piramide
 
-// limpa estados
-glDisableClientState(GL_COLOR_ARRAY);
-glDisableClientState(GL_VERTEX_ARRAY);
+    // limpa estados
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
 
-}/**
+} /**
 Figura geometrica - piramide
 */
-void phDesenharPiramide(){
+void phDesenharPiramide()
+{
 
-glScalef(4.0,4.0,4.0);
-GLfloat verticesPiramide[] = {
--0.5, 0.0, 0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 0.5,
--0.5, 0.0, -0.5, 0.0, 1.0, 0.0, -0.5, 0.0, 0.5,
--0.5, 0.0, -0.5, 0.0, 1.0, 0.0, 0.5, 0.0,-0.5,
-0.5, 0.0,-0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 0.5,
+    glScalef(4.0, 4.0, 4.0);
+    GLfloat verticesPiramide[] = {
+        -0.5, 0.0, 0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 0.5,
+        -0.5, 0.0, -0.5, 0.0, 1.0, 0.0, -0.5, 0.0, 0.5,
+        -0.5, 0.0, -0.5, 0.0, 1.0, 0.0, 0.5, 0.0, -0.5,
+        0.5, 0.0, -0.5, 0.0, 1.0, 0.0, 0.5, 0.0, 0.5,
 
--0.5, 0.0, 0.5, -0.5, 0.0, -0.5, 0.5,0.0,0.5, // base - 2 triangulos
--0.5, 0.0, -0.5, 0.5, 0.0,-0.5, 0.5,0.0,0.5
+        -0.5, 0.0, 0.5, -0.5, 0.0, -0.5, 0.5, 0.0, 0.5, // base - 2 triangulos
+        -0.5, 0.0, -0.5, 0.5, 0.0, -0.5, 0.5, 0.0, 0.5
 
-};
+    };
 
-GLfloat coresPiramide[]={
-0, 0, 0.4, 0, 0, 0.4, 0, 0, 0.4, // azul escuro
-1, 0.5, 0, 1, 0.5, 0, 1, 0.5, 0, // laranja
-1, 1, 0, 1, 1, 0, 1, 1, 0, // amarelo
-0, 1, 0.5, 0, 1, 0.5, 0, 1, 0.5, // verde
-0.0,0.0,0.0, 0.0,0.0,0.0, 0.0,0.0,0.0, // preto
-0.0,0.0,0.0, 0.0,0.0,0.0, 0.0,0.0,0.0 // preto
+    GLfloat coresPiramide[] = {
+        0, 0, 0.4, 0, 0, 0.4, 0, 0, 0.4,             // azul escuro
+        1, 0.5, 0, 1, 0.5, 0, 1, 0.5, 0,             // laranja
+        1, 1, 0, 1, 1, 0, 1, 1, 0,                   // amarelo
+        0, 1, 0.5, 0, 1, 0.5, 0, 1, 0.5,             // verde
+        0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, // preto
+        0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0  // preto
 
-};
+    };
 
-glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-glEnableClientState(GL_VERTEX_ARRAY);
-glEnableClientState(GL_COLOR_ARRAY);
-glVertexPointer(3, GL_FLOAT, 0, verticesPiramide); // size, tipo, deslocamento inicial, ponteiro
-glColorPointer(3, GL_FLOAT, 0, coresPiramide); // size, tipo, deslocamento inicial, ponteiro
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, verticesPiramide); // size, tipo, deslocamento inicial, ponteiro
+    glColorPointer(3, GL_FLOAT, 0, coresPiramide);     // size, tipo, deslocamento inicial, ponteiro
 
-glDrawArrays(GL_TRIANGLES, 0, 6*3); // desenha os pontos da piramide
+    glDrawArrays(GL_TRIANGLES, 0, 6 * 3); // desenha os pontos da piramide
 
-// limpa estados
-glDisableClientState(GL_COLOR_ARRAY);
-glDisableClientState(GL_VERTEX_ARRAY);
-
+    // limpa estados
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void phDesenharEixosOrigem(float tomCinza){
-glLineWidth(3.0);
-glColor3f(tomCinza, tomCinza, tomCinza);
-glBegin(GL_LINES);
-glVertex3f(-1000.0, 0.0, 0.0);
-glVertex3f( 1000.0, 0.0, 0.0);
-glEnd();
+void phDesenharEixosOrigem(float tomCinza)
+{
+    glLineWidth(3.0);
+    glColor3f(tomCinza, tomCinza, tomCinza);
+    glBegin(GL_LINES);
+    glVertex3f(-1000.0, 0.0, 0.0);
+    glVertex3f(1000.0, 0.0, 0.0);
+    glEnd();
 
-glColor3f(tomCinza, tomCinza, tomCinza);
-glBegin(GL_LINES);
-glVertex3f(0.0, -1000.0, 0.0);
-glVertex3f(0.0, 1000.0, 0.0);
-glEnd();
+    glColor3f(tomCinza, tomCinza, tomCinza);
+    glBegin(GL_LINES);
+    glVertex3f(0.0, -1000.0, 0.0);
+    glVertex3f(0.0, 1000.0, 0.0);
+    glEnd();
 
-glColor3f(tomCinza, tomCinza, tomCinza);
-glBegin(GL_LINES);
-glVertex3f(0.0, 0.0,-1000.0);
-glVertex3f(0.0, 0.0, 1000.0);
-glEnd();
+    glColor3f(tomCinza, tomCinza, tomCinza);
+    glBegin(GL_LINES);
+    glVertex3f(0.0, 0.0, -1000.0);
+    glVertex3f(0.0, 0.0, 1000.0);
+    glEnd();
 
-// origem (0,0,0)
-glPointSize(10.0f);
-glColor3f(0.0f, 0.0f, 0.0f);
-glBegin(GL_POINTS);
-glVertex3f(0.0f, 0.0f, 0.0f);
-glEnd();
+    // origem (0,0,0)
+    glPointSize(10.0f);
+    glColor3f(0.0f, 0.0f, 0.0f);
+    glBegin(GL_POINTS);
+    glVertex3f(0.0f, 0.0f, 0.0f);
+    glEnd();
 
-// restore
-glLineWidth(1.0);
-glPointSize(1.0f);
+    // restore
+    glLineWidth(1.0);
+    glPointSize(1.0f);
 }

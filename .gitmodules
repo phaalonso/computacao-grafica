@@ -1,0 +1,3 @@
+[submodule "tarefa_visualizacao"]
+	path = tarefa_visualizacao
+	url = git@github.com:phaalonso/visualizacao_grafica.git
